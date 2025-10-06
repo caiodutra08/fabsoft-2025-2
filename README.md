@@ -6,11 +6,8 @@ Caio e gasparzinho
 
 - Gerenciamento de treinos
   - Funcionalidade 1 Cadastrar dados do usuário
-  - Funcionalidade 2 Cadastrar treinos
-  - Funcionalidade 3 Gerar treino personalizado para usuário com AI
-  - Funcionalidade 4 Automatizar modificações no treino de acordo com performance
-  - Funcionalidade 6 Escolher tipo de treino
-  - Funcionalidade 7 Consulta com profissionais da area
+  - Funcionalidade 2 Gerar treino personalizado para usuário com AI
+  - Funcionalidade 3 Feedback de treino realizado
 
 ## Histórias de usuário
 
@@ -21,9 +18,8 @@ Caio e gasparzinho
 - Como usuário posso pedir dicas nutricionais
 
 ```mermaid
-classDiagram
+**classDiagram**
     Customer"*"-->"1"ExerciseDays
-    Customer"*"-->"*"Exercise
     class Customer{
         -id: string
         -name: string
@@ -52,7 +48,7 @@ classDiagram
         FIVE_DAYS
     }
     class Exercise{
-        -id: string
+        -id: **string**
         -name: string
         -video: string
         -thubmnail: string
@@ -70,9 +66,12 @@ classDiagram
         -id: string
         -duration: int
         -rating: int
+        -feedback: string
         +getId()string
         +setId(id: string)void
         +getDuration()int
+        +getFeedback()string
+        +setFeedback()void
         +setDuration(id: string)void
         +getRating()int
         +setRating(id: string)void

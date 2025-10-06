@@ -1,11 +1,15 @@
 package br.univille.fabsoft_backend.domain.entity;
 
-import java.util.UUID;
+import java.util.List;
 
+import br.univille.fabsoft_backend.domain.enums.ExerciseDays;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,11 +17,19 @@ import lombok.Setter;
 @Setter
 @Entity
 public class Customer {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private UUID string;
-  private String name;
-  private Integer age;
-  private Integer weight;
-  private String gender;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private String id;
+    private String name;
+    private Integer age;
+    private Integer weight;
+    private Integer height;
+    private String gender;
+    
+    @Enumerated(EnumType.STRING)
+    private ExerciseDays exerciseDays;
+    
+    @OneToMany(mappedBy = "customer")
+    private List<ExecutedExercise> executedExercises;
 }

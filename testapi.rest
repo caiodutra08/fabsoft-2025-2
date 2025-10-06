@@ -1,0 +1,264 @@
+### FabSoft Backend API Test Collection
+### Base URL
+@baseUrl = http://localhost:8080
+
+### Variables (replace with actual UUIDs from your API responses)
+@customerId = YOUR_CUSTOMER_UUID_HERE
+@exerciseId = YOUR_EXERCISE_UUID_HERE
+@executedExerciseId = YOUR_EXECUTED_EXERCISE_UUID_HERE
+
+### ===========================================
+### CUSTOMER ENDPOINTS
+### ===========================================
+
+### Get all customers
+GET {{baseUrl}}/api/v1/customers
+Accept: application/json
+
+###
+
+### Get customer by ID (replace with actual UUID after creating one)
+GET {{baseUrl}}/api/v1/customers/{{customerId}}
+Accept: application/json
+
+###
+
+### Create a new customer
+POST {{baseUrl}}/api/v1/customers
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "age": 28,
+  "weight": 75,
+  "height": 180,
+  "gender": "Male",
+  "exerciseDays": "FOUR_DAYS"
+}
+
+###
+
+### Create another customer
+POST {{baseUrl}}/api/v1/customers
+Content-Type: application/json
+
+{
+  "name": "Jane Smith", 
+  "age": 24,
+  "weight": 60,
+  "height": 165,
+  "gender": "Female",
+  "exerciseDays": "FIVE_DAYS"
+}
+
+###
+
+### Update customer (replace with actual UUID)
+PUT {{baseUrl}}/api/v1/customers/{{customerId}}
+Content-Type: application/json
+
+{
+  "name": "John Doe Updated",
+  "age": 29,
+  "weight": 78,
+  "height": 180,
+  "gender": "Male",
+  "exerciseDays": "FIVE_DAYS"
+}
+
+###
+
+### Delete customer (replace with actual UUID)
+DELETE {{baseUrl}}/api/v1/customers/{{customerId}}
+
+###
+
+### ===========================================
+### EXERCISE ENDPOINTS
+### ===========================================
+
+### Get all exercises
+GET {{baseUrl}}/api/v1/exercises
+Accept: application/json
+
+###
+
+### Get exercise by ID (replace with actual UUID)
+GET {{baseUrl}}/api/v1/exercises/{{exerciseId}}
+Accept: application/json
+
+###
+
+### Create a new exercise
+POST {{baseUrl}}/api/v1/exercises
+Content-Type: application/json
+
+{
+  "name": "Push-ups",
+  "video": "https://example.com/videos/push-ups.mp4",
+  "thumbnail": "https://example.com/thumbnails/push-ups.jpg"
+}
+
+###
+
+### Create another exercise
+POST {{baseUrl}}/api/v1/exercises
+Content-Type: application/json
+
+{
+  "name": "Squats",
+  "video": "https://example.com/videos/squats.mp4", 
+  "thumbnail": "https://example.com/thumbnails/squats.jpg"
+}
+
+###
+
+### Update exercise (replace with actual UUID)
+PUT {{baseUrl}}/api/v1/exercises/{{exerciseId}}
+Content-Type: application/json
+
+{
+  "name": "Advanced Push-ups",
+  "video": "https://example.com/videos/advanced-push-ups.mp4",
+  "thumbnail": "https://example.com/thumbnails/advanced-push-ups.jpg"
+}
+
+###
+
+### Delete exercise (replace with actual UUID)
+DELETE {{baseUrl}}/api/v1/exercises/{{exerciseId}}
+
+###
+
+### ===========================================
+### EXECUTED EXERCISE ENDPOINTS
+### ===========================================
+
+### Get all executed exercises
+GET {{baseUrl}}/api/v1/executed-exercises
+Accept: application/json
+
+###
+
+### Get executed exercise by ID (replace with actual UUID)
+GET {{baseUrl}}/api/v1/executed-exercises/{{executedExerciseId}}
+Accept: application/json
+
+###
+
+### Get executed exercises by customer ID (replace with actual customer UUID)
+GET {{baseUrl}}/api/v1/executed-exercises/customer/{{customerId}}
+Accept: application/json
+
+###
+
+### Create a new executed exercise (replace UUIDs with actual ones)
+POST {{baseUrl}}/api/v1/executed-exercises
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId}}",
+  "exerciseId": "{{exerciseId}}",
+  "duration": 30,
+  "rating": 4,
+  "feedback": "Great workout!",
+  "difficulty": "THREE"
+}
+
+###
+
+### Update executed exercise (replace with actual UUID)
+PUT {{baseUrl}}/api/v1/executed-exercises/{{executedExerciseId}}
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId}}",
+  "exerciseId": "{{exerciseId}}",
+  "duration": 45,
+  "rating": 5,
+  "feedback": "Amazing workout session!",
+  "difficulty": "FOUR"
+}
+
+###
+
+### Update feedback only (replace with actual UUID)
+PUT {{baseUrl}}/api/v1/executed-exercises/{{executedExerciseId}}/feedback
+Content-Type: application/json
+
+{
+  "feedback": "Updated feedback - excellent form!",
+  "rating": 5
+}
+
+###
+
+### Delete executed exercise (replace with actual UUID)
+DELETE {{baseUrl}}/api/v1/executed-exercises/{{executedExerciseId}}
+
+###
+
+### ===========================================
+### TRAINING PLAN ENDPOINTS
+### ===========================================
+
+### Generate training plan for customer (replace with actual customer UUID)
+GET {{baseUrl}}/api/v1/training-plans/generate/{{customerId}}
+Accept: application/json
+
+###
+
+### ===========================================
+### DATABASE CONSOLE ACCESS
+### ===========================================
+
+### H2 Database Console (Open in browser)
+### URL: http://localhost:8080/bancodedados
+### JDBC URL: jdbc:h2:file:~/db
+### Username: sa
+### Password: (leave empty)
+
+### ===========================================
+### EXAMPLE WORKFLOW
+### ===========================================
+
+### 1. First, get all customers to see seeded data
+GET {{baseUrl}}/api/v1/customers
+
+### 2. Get all exercises to see seeded data  
+GET {{baseUrl}}/api/v1/exercises
+
+### 3. Get all executed exercises to see seeded relationships
+GET {{baseUrl}}/api/v1/executed-exercises
+
+### 4. Create a new customer and copy the returned ID
+POST {{baseUrl}}/api/v1/customers
+Content-Type: application/json
+
+{
+  "name": "Test User",
+  "age": 25,
+  "weight": 70,
+  "height": 175,
+  "gender": "Male",
+  "exerciseDays": "THREE_DAYS"
+}
+
+### 5. Generate a training plan for the customer (use ID from step 4)
+# GET {{baseUrl}}/api/v1/training-plans/generate/YOUR_CUSTOMER_ID_HERE
+
+### ===========================================
+### ENUM VALUES REFERENCE
+### ===========================================
+
+# ExerciseDays: THREE_DAYS, FOUR_DAYS, FIVE_DAYS, MORE_THAN_FIVE
+# ExerciseDifficulty: ONE, TWO, THREE, FOUR, FIVE
+# Gender: Typically "Male" or "Female" (String field)
+
+### ===========================================
+### VARIABLES TO REPLACE
+### ===========================================
+# Replace these variables with actual UUIDs from your responses:
+# {{customerId}} - UUID of a customer
+# {{exerciseId}} - UUID of an exercise  
+# {{executedExerciseId}} - UUID of an executed exercise
