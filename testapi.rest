@@ -3,9 +3,9 @@
 @baseUrl = http://localhost:8080
 
 ### Variables (replace with actual UUIDs from your API responses)
-@customerId = YOUR_CUSTOMER_UUID_HERE
-@exerciseId = YOUR_EXERCISE_UUID_HERE
-@executedExerciseId = YOUR_EXECUTED_EXERCISE_UUID_HERE
+@customerId = YOUR_CUSTOMER_ID_HERE
+@exerciseId = YOUR_EXERCISE_ID_HERE
+@executedExerciseId = YOUR_EXECUTED_EXERCISE_ID_HERE
 
 ### ===========================================
 ### CUSTOMER ENDPOINTS

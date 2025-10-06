@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class ExerciseDTO {
-    private String id;
+    private Long id;
     private String name;
     private String video;
     private String thumbnail;

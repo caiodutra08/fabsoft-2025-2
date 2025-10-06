@@ -1,7 +1,6 @@
 package br.univille.fabsoft_backend.service.impl;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
@@ -27,7 +26,7 @@ public class ExerciseServiceImpl implements ExerciseService {
     }
 
     @Override
-    public ExerciseDTO getById(UUID id) {
+    public ExerciseDTO getById(Long id) {
         return exerciseRepository.findById(id)
                 .map(this::convertToDTO)
                 .orElse(null);
@@ -42,7 +41,7 @@ public class ExerciseServiceImpl implements ExerciseService {
     }
 
     @Override
-    public ExerciseDTO update(UUID id, ExerciseDTO exerciseDTO) {
+    public ExerciseDTO update(Long id, ExerciseDTO exerciseDTO) {
         return exerciseRepository.findById(id)
                 .map(existingExercise -> {
                     BeanUtils.copyProperties(exerciseDTO, existingExercise, "id");
@@ -53,14 +52,13 @@ public class ExerciseServiceImpl implements ExerciseService {
     }
 
     @Override
-    public void delete(UUID id) {
+    public void delete(Long id) {
         exerciseRepository.deleteById(id);
     }
 
     private ExerciseDTO convertToDTO(Exercise exercise) {
         ExerciseDTO exerciseDTO = new ExerciseDTO();
         BeanUtils.copyProperties(exercise, exerciseDTO);
-        exerciseDTO.setId(exercise.getId().toString());
         return exerciseDTO;
     }
 }

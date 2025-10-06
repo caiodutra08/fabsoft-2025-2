@@ -1,7 +1,6 @@
 package br.univille.fabsoft_backend.service.impl;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
@@ -38,14 +37,14 @@ public class ExecutedExerciseServiceImpl implements ExecutedExerciseService {
     }
 
     @Override
-    public ExecutedExerciseDTO getById(UUID id) {
+    public ExecutedExerciseDTO getById(Long id) {
         return executedExerciseRepository.findById(id)
                 .map(this::convertToDTO)
                 .orElse(null);
     }
     
     @Override
-    public List<ExecutedExerciseDTO> getByCustomerId(UUID customerId) {
+    public List<ExecutedExerciseDTO> getByCustomerId(Long customerId) {
         return executedExerciseRepository.findByCustomerId(customerId).stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
@@ -57,12 +56,12 @@ public class ExecutedExerciseServiceImpl implements ExecutedExerciseService {
         BeanUtils.copyProperties(executedExerciseDTO, executedExercise, "customerId", "exerciseId");
         
         if (executedExerciseDTO.getCustomerId() != null) {
-            Customer customer = customerRepository.findById(UUID.fromString(executedExerciseDTO.getCustomerId())).orElse(null);
+            Customer customer = customerRepository.findById(executedExerciseDTO.getCustomerId()).orElse(null);
             executedExercise.setCustomer(customer);
         }
         
         if (executedExerciseDTO.getExerciseId() != null) {
-            Exercise exercise = exerciseRepository.findById(UUID.fromString(executedExerciseDTO.getExerciseId())).orElse(null);
+            Exercise exercise = exerciseRepository.findById(executedExerciseDTO.getExerciseId()).orElse(null);
             executedExercise.setExercise(exercise);
         }
         
@@ -71,18 +70,18 @@ public class ExecutedExerciseServiceImpl implements ExecutedExerciseService {
     }
 
     @Override
-    public ExecutedExerciseDTO update(UUID id, ExecutedExerciseDTO executedExerciseDTO) {
+    public ExecutedExerciseDTO update(Long id, ExecutedExerciseDTO executedExerciseDTO) {
         return executedExerciseRepository.findById(id)
                 .map(existingExecutedExercise -> {
                     BeanUtils.copyProperties(executedExerciseDTO, existingExecutedExercise, "id", "customerId", "exerciseId");
                     
                     if (executedExerciseDTO.getCustomerId() != null) {
-                        Customer customer = customerRepository.findById(UUID.fromString(executedExerciseDTO.getCustomerId())).orElse(null);
+                        Customer customer = customerRepository.findById(executedExerciseDTO.getCustomerId()).orElse(null);
                         existingExecutedExercise.setCustomer(customer);
                     }
                     
                     if (executedExerciseDTO.getExerciseId() != null) {
-                        Exercise exercise = exerciseRepository.findById(UUID.fromString(executedExerciseDTO.getExerciseId())).orElse(null);
+                        Exercise exercise = exerciseRepository.findById(executedExerciseDTO.getExerciseId()).orElse(null);
                         existingExecutedExercise.setExercise(exercise);
                     }
                     
@@ -93,7 +92,7 @@ public class ExecutedExerciseServiceImpl implements ExecutedExerciseService {
     }
     
     @Override
-    public ExecutedExerciseDTO updateFeedback(UUID id, FeedbackDTO feedbackDTO) {
+    public ExecutedExerciseDTO updateFeedback(Long id, FeedbackDTO feedbackDTO) {
         return executedExerciseRepository.findById(id)
                 .map(existingExecutedExercise -> {
                     existingExecutedExercise.setRating(feedbackDTO.getRating());
@@ -105,7 +104,7 @@ public class ExecutedExerciseServiceImpl implements ExecutedExerciseService {
     }
 
     @Override
-    public void delete(UUID id) {
+    public void delete(Long id) {
         executedExerciseRepository.deleteById(id);
     }
 
@@ -113,14 +112,12 @@ public class ExecutedExerciseServiceImpl implements ExecutedExerciseService {
         ExecutedExerciseDTO executedExerciseDTO = new ExecutedExerciseDTO();
         BeanUtils.copyProperties(executedExercise, executedExerciseDTO);
         
-        executedExerciseDTO.setId(executedExercise.getId().toString());
-        
         if (executedExercise.getCustomer() != null) {
-            executedExerciseDTO.setCustomerId(executedExercise.getCustomer().getId().toString());
+            executedExerciseDTO.setCustomerId(executedExercise.getCustomer().getId());
         }
         
         if (executedExercise.getExercise() != null) {
-            executedExerciseDTO.setExerciseId(executedExercise.getExercise().getId().toString());
+            executedExerciseDTO.setExerciseId(executedExercise.getExercise().getId());
             executedExerciseDTO.setExerciseName(executedExercise.getExercise().getName());
         }
         

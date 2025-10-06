@@ -13,7 +13,7 @@ import lombok.Setter;
 public class Exercise {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private String id;
+  private long id;
   private String name;
   private String video;
   private String thumbnail;

@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class FeedbackDTO {
-    private String executedExerciseId;
+    private Long executedExerciseId;
     private Integer rating;
     private String feedback;
 }

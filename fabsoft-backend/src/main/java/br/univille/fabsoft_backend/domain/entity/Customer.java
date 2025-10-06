@@ -17,10 +17,9 @@ import lombok.Setter;
 @Setter
 @Entity
 public class Customer {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     private String name;
     private Integer age;
     private Integer weight;

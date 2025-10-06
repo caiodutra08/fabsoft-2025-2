@@ -1,7 +1,6 @@
 package br.univille.fabsoft_backend.service.impl;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
@@ -27,7 +26,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerDTO getById(UUID id) {
+    public CustomerDTO getById(Long id) {
         return customerRepository.findById(id)
                 .map(this::convertToDTO)
                 .orElse(null);
@@ -42,7 +41,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerDTO update(UUID id, CustomerDTO customerDTO) {
+    public CustomerDTO update(Long id, CustomerDTO customerDTO) {
         return customerRepository.findById(id)
                 .map(existingCustomer -> {
                     BeanUtils.copyProperties(customerDTO, existingCustomer, "id");
@@ -53,14 +52,13 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void delete(UUID id) {
+    public void delete(Long id) {
         customerRepository.deleteById(id);
     }
 
     private CustomerDTO convertToDTO(Customer customer) {
         CustomerDTO customerDTO = new CustomerDTO();
         BeanUtils.copyProperties(customer, customerDTO);
-        customerDTO.setId(customer.getId().toString());
         return customerDTO;
     }
 }

@@ -3,7 +3,6 @@ package br.univille.fabsoft_backend.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,14 +29,14 @@ public class TrainingPlanServiceImpl implements TrainingPlanService {
     private final Random random = new Random();
 
     @Override
-    public TrainingPlanDTO generateTrainingPlan(UUID customerId) {
+    public TrainingPlanDTO generateTrainingPlan(Long customerId) {
         CustomerDTO customerDTO = customerService.getById(customerId);
         if (customerDTO == null) {
             return null;
         }
         
         TrainingPlanDTO trainingPlan = new TrainingPlanDTO();
-        trainingPlan.setCustomerId(customerId.toString());
+        trainingPlan.setCustomerId(customerId);
         
         int exercisesPerDay = determineExercisesPerDay(customerDTO.getExerciseDays());
         
