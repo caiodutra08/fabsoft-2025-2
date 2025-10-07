@@ -24,8 +24,6 @@ public class TrainingPlanServiceImpl implements TrainingPlanService {
     @Autowired
     private ExerciseService exerciseService;
     
-    @Autowired
-    
     private final Random random = new Random();
 
     @Override

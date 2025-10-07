@@ -17,8 +17,8 @@ import lombok.Setter;
 @Entity
 public class ExecutedExercise {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private Integer duration;
     private Integer rating;
     private String feedback;

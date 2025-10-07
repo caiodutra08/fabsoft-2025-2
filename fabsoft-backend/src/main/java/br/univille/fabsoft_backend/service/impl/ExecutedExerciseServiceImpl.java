@@ -53,7 +53,11 @@ public class ExecutedExerciseServiceImpl implements ExecutedExerciseService {
     @Override
     public ExecutedExerciseDTO save(ExecutedExerciseDTO executedExerciseDTO) {
         ExecutedExercise executedExercise = new ExecutedExercise();
-        BeanUtils.copyProperties(executedExerciseDTO, executedExercise, "customerId", "exerciseId");
+        // Manual mapping to avoid any BeanUtils issues
+        executedExercise.setDuration(executedExerciseDTO.getDuration());
+        executedExercise.setRating(executedExerciseDTO.getRating());
+        executedExercise.setFeedback(executedExerciseDTO.getFeedback());
+        executedExercise.setDifficulty(executedExerciseDTO.getDifficulty());
         
         if (executedExerciseDTO.getCustomerId() != null) {
             Customer customer = customerRepository.findById(executedExerciseDTO.getCustomerId()).orElse(null);
@@ -65,6 +69,7 @@ public class ExecutedExerciseServiceImpl implements ExecutedExerciseService {
             executedExercise.setExercise(exercise);
         }
         
+        // ID is not set - will be auto-generated
         executedExercise = executedExerciseRepository.save(executedExercise);
         return convertToDTO(executedExercise);
     }

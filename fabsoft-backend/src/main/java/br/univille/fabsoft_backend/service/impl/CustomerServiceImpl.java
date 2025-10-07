@@ -35,7 +35,14 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerDTO save(CustomerDTO customerDTO) {
         Customer customer = new Customer();
-        BeanUtils.copyProperties(customerDTO, customer);
+        // Manual mapping to avoid any BeanUtils issues
+        customer.setName(customerDTO.getName());
+        customer.setAge(customerDTO.getAge());
+        customer.setWeight(customerDTO.getWeight());
+        customer.setHeight(customerDTO.getHeight());
+        customer.setGender(customerDTO.getGender());
+        customer.setExerciseDays(customerDTO.getExerciseDays());
+        // ID is not set - will be auto-generated
         customer = customerRepository.save(customer);
         return convertToDTO(customer);
     }

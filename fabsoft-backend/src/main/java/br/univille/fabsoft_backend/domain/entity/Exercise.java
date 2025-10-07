@@ -12,8 +12,8 @@ import lombok.Setter;
 @Entity
 public class Exercise {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long id;
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Long id;
   private String name;
   private String video;
   private String thumbnail;

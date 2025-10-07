@@ -35,7 +35,11 @@ public class ExerciseServiceImpl implements ExerciseService {
     @Override
     public ExerciseDTO save(ExerciseDTO exerciseDTO) {
         Exercise exercise = new Exercise();
-        BeanUtils.copyProperties(exerciseDTO, exercise);
+        // Manual mapping to avoid any BeanUtils issues
+        exercise.setName(exerciseDTO.getName());
+        exercise.setVideo(exerciseDTO.getVideo());
+        exercise.setThumbnail(exerciseDTO.getThumbnail());
+        // ID is not set - will be auto-generated
         exercise = exerciseRepository.save(exercise);
         return convertToDTO(exercise);
     }
