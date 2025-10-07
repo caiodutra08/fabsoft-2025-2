@@ -3,9 +3,9 @@
 @baseUrl = http://localhost:8080
 
 ### Variables (replace with actual UUIDs from your API responses)
-@customerId = YOUR_CUSTOMER_ID_HERE
-@exerciseId = YOUR_EXERCISE_ID_HERE
-@executedExerciseId = YOUR_EXECUTED_EXERCISE_ID_HERE
+@customerId = 1
+@exerciseId = 1
+@executedExerciseId = 1
 
 ### ===========================================
 ### CUSTOMER ENDPOINTS
@@ -157,8 +157,8 @@ POST {{baseUrl}}/api/v1/executed-exercises
 Content-Type: application/json
 
 {
-  "customerId": "{{customerId}}",
-  "exerciseId": "{{exerciseId}}",
+  "customerId": "1",
+  "exerciseId": "1",
   "duration": 30,
   "rating": 4,
   "feedback": "Great workout!",
@@ -205,60 +205,3 @@ DELETE {{baseUrl}}/api/v1/executed-exercises/{{executedExerciseId}}
 ### Generate training plan for customer (replace with actual customer UUID)
 GET {{baseUrl}}/api/v1/training-plans/generate/{{customerId}}
 Accept: application/json
-
-###
-
-### ===========================================
-### DATABASE CONSOLE ACCESS
-### ===========================================
-
-### H2 Database Console (Open in browser)
-### URL: http://localhost:8080/bancodedados
-### JDBC URL: jdbc:h2:file:~/db
-### Username: sa
-### Password: (leave empty)
-
-### ===========================================
-### EXAMPLE WORKFLOW
-### ===========================================
-
-### 1. First, get all customers to see seeded data
-GET {{baseUrl}}/api/v1/customers
-
-### 2. Get all exercises to see seeded data  
-GET {{baseUrl}}/api/v1/exercises
-
-### 3. Get all executed exercises to see seeded relationships
-GET {{baseUrl}}/api/v1/executed-exercises
-
-### 4. Create a new customer and copy the returned ID
-POST {{baseUrl}}/api/v1/customers
-Content-Type: application/json
-
-{
-  "name": "Test User",
-  "age": 25,
-  "weight": 70,
-  "height": 175,
-  "gender": "Male",
-  "exerciseDays": "THREE_DAYS"
-}
-
-### 5. Generate a training plan for the customer (use ID from step 4)
-# GET {{baseUrl}}/api/v1/training-plans/generate/YOUR_CUSTOMER_ID_HERE
-
-### ===========================================
-### ENUM VALUES REFERENCE
-### ===========================================
-
-# ExerciseDays: THREE_DAYS, FOUR_DAYS, FIVE_DAYS, MORE_THAN_FIVE
-# ExerciseDifficulty: ONE, TWO, THREE, FOUR, FIVE
-# Gender: Typically "Male" or "Female" (String field)
-
-### ===========================================
-### VARIABLES TO REPLACE
-### ===========================================
-# Replace these variables with actual UUIDs from your responses:
-# {{customerId}} - UUID of a customer
-# {{exerciseId}} - UUID of an exercise  
-# {{executedExerciseId}} - UUID of an executed exercise
