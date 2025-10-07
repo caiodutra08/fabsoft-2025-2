@@ -1,7 +1,6 @@
 package br.univille.fabsoft_backend.api.controller;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,18 +31,13 @@ public class ExerciseController {
     }
     
     @GetMapping("/{id}")
-    public ResponseEntity<ExerciseDTO> getById(@PathVariable("id") String id) {
-        try {
-            UUID uuid = UUID.fromString(id);
-            ExerciseDTO exercise = exerciseService.getById(uuid);
-            
-            if (exercise != null) {
-                return new ResponseEntity<>(exercise, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
-        } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    public ResponseEntity<ExerciseDTO> getById(@PathVariable("id") Long id) {
+        ExerciseDTO exercise = exerciseService.getById(id);
+        
+        if (exercise != null) {
+            return new ResponseEntity<>(exercise, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
     
@@ -54,35 +48,25 @@ public class ExerciseController {
     }
     
     @PutMapping("/{id}")
-    public ResponseEntity<ExerciseDTO> update(@PathVariable("id") String id, @RequestBody ExerciseDTO exerciseDTO) {
-        try {
-            UUID uuid = UUID.fromString(id);
-            ExerciseDTO updatedExercise = exerciseService.update(uuid, exerciseDTO);
-            
-            if (updatedExercise != null) {
-                return new ResponseEntity<>(updatedExercise, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
-        } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    public ResponseEntity<ExerciseDTO> update(@PathVariable("id") Long id, @RequestBody ExerciseDTO exerciseDTO) {
+        ExerciseDTO updatedExercise = exerciseService.update(id, exerciseDTO);
+        
+        if (updatedExercise != null) {
+            return new ResponseEntity<>(updatedExercise, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
     
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable("id") String id) {
-        try {
-            UUID uuid = UUID.fromString(id);
-            ExerciseDTO exercise = exerciseService.getById(uuid);
-            
-            if (exercise != null) {
-                exerciseService.delete(uuid);
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
-        } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
+        ExerciseDTO exercise = exerciseService.getById(id);
+        
+        if (exercise != null) {
+            exerciseService.delete(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }

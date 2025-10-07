@@ -1,7 +1,6 @@
 package br.univille.fabsoft_backend.api.controller;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,18 +31,13 @@ public class CustomerController {
     }
     
     @GetMapping("/{id}")
-    public ResponseEntity<CustomerDTO> getById(@PathVariable("id") String id) {
-        try {
-            UUID uuid = UUID.fromString(id);
-            CustomerDTO customer = customerService.getById(uuid);
-            
-            if (customer != null) {
-                return new ResponseEntity<>(customer, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
-        } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    public ResponseEntity<CustomerDTO> getById(@PathVariable("id") Long id) {
+        CustomerDTO customer = customerService.getById(id);
+        
+        if (customer != null) {
+            return new ResponseEntity<>(customer, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
     
@@ -54,35 +48,25 @@ public class CustomerController {
     }
     
     @PutMapping("/{id}")
-    public ResponseEntity<CustomerDTO> update(@PathVariable("id") String id, @RequestBody CustomerDTO customerDTO) {
-        try {
-            UUID uuid = UUID.fromString(id);
-            CustomerDTO updatedCustomer = customerService.update(uuid, customerDTO);
-            
-            if (updatedCustomer != null) {
-                return new ResponseEntity<>(updatedCustomer, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
-        } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    public ResponseEntity<CustomerDTO> update(@PathVariable("id") Long id, @RequestBody CustomerDTO customerDTO) {
+        CustomerDTO updatedCustomer = customerService.update(id, customerDTO);
+        
+        if (updatedCustomer != null) {
+            return new ResponseEntity<>(updatedCustomer, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
     
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable("id") String id) {
-        try {
-            UUID uuid = UUID.fromString(id);
-            CustomerDTO customer = customerService.getById(uuid);
-            
-            if (customer != null) {
-                customerService.delete(uuid);
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
-        } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
+        CustomerDTO customer = customerService.getById(id);
+        
+        if (customer != null) {
+            customerService.delete(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }
