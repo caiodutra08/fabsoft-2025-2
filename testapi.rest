@@ -3,7 +3,7 @@
 @baseUrl = http://localhost:8080
 
 ### Variables (replace with actual UUIDs from your API responses)
-@customerId = 1
+@customerId = 3
 @exerciseId = 1
 @executedExerciseId = 1
 
@@ -28,7 +28,7 @@ POST {{baseUrl}}/api/v1/customers
 Content-Type: application/json
 
 {
-  "name": "John Doe",
+  "name": "PROF WALTER",
   "age": 28,
   "weight": 75,
   "height": 180,
@@ -43,7 +43,7 @@ POST {{baseUrl}}/api/v1/customers
 Content-Type: application/json
 
 {
-  "name": "Jane Smith", 
+  "name": "PROF DORNEL", 
   "age": 24,
   "weight": 60,
   "height": 165,
@@ -58,18 +58,18 @@ PUT {{baseUrl}}/api/v1/customers/{{customerId}}
 Content-Type: application/json
 
 {
-  "name": "John Doe Updated",
+  "name": "Dornel Atualizado",
   "age": 29,
   "weight": 78,
-  "height": 180,
-  "gender": "Male",
+  "height": 164,
+  "gender": "Female",
   "exerciseDays": "FIVE_DAYS"
 }
 
 ###
 
 ### Delete customer (replace with actual UUID)
-DELETE {{baseUrl}}/api/v1/customers/{{customerId}}
+DELETE {{baseUrl}}/api/v1/customers/3
 
 ###
 
@@ -94,9 +94,9 @@ POST {{baseUrl}}/api/v1/exercises
 Content-Type: application/json
 
 {
-  "name": "Push-ups",
-  "video": "https://example.com/videos/push-ups.mp4",
-  "thumbnail": "https://example.com/thumbnails/push-ups.jpg"
+  "name": "Agachamentos",
+  "video": "https://example.com/videos/agachamentos.mp4",
+  "thumbnail": "https://example.com/thumbnails/agachamentos.jpg"
 }
 
 ###
@@ -106,27 +106,27 @@ POST {{baseUrl}}/api/v1/exercises
 Content-Type: application/json
 
 {
-  "name": "Squats",
-  "video": "https://example.com/videos/squats.mp4", 
-  "thumbnail": "https://example.com/thumbnails/squats.jpg"
+  "name": "Biceps Curls",
+  "video": "https://example.com/videos/biceps-curls.mp4",
+  "thumbnail": "https://example.com/thumbnails/biceps-curls.jpg"
 }
 
 ###
 
 ### Update exercise (replace with actual UUID)
-PUT {{baseUrl}}/api/v1/exercises/{{exerciseId}}
+PUT {{baseUrl}}/api/v1/exercises/53
 Content-Type: application/json
 
 {
-  "name": "Advanced Push-ups",
-  "video": "https://example.com/videos/advanced-push-ups.mp4",
-  "thumbnail": "https://example.com/thumbnails/advanced-push-ups.jpg"
+  "name": "Biceps na polia",
+  "video": "https://example.com/videos/biceps-na-polia.mp4",
+  "thumbnail": "https://example.com/thumbnails/biceps-na-polia.jpg"
 }
 
 ###
 
 ### Delete exercise (replace with actual UUID)
-DELETE {{baseUrl}}/api/v1/exercises/{{exerciseId}}
+DELETE {{baseUrl}}/api/v1/exercises/53
 
 ###
 
@@ -141,13 +141,13 @@ Accept: application/json
 ###
 
 ### Get executed exercise by ID (replace with actual UUID)
-GET {{baseUrl}}/api/v1/executed-exercises/{{executedExerciseId}}
+GET {{baseUrl}}/api/v1/executed-exercises/3
 Accept: application/json
 
 ###
 
 ### Get executed exercises by customer ID (replace with actual customer UUID)
-GET {{baseUrl}}/api/v1/executed-exercises/customer/{{customerId}}
+GET {{baseUrl}}/api/v1/executed-exercises/customer/2
 Accept: application/json
 
 ###
@@ -157,44 +157,44 @@ POST {{baseUrl}}/api/v1/executed-exercises
 Content-Type: application/json
 
 {
-  "customerId": "1",
-  "exerciseId": "1",
+  "customerId": "2",
+  "exerciseId": "2",
   "duration": 30,
   "rating": 4,
-  "feedback": "Great workout!",
+  "feedback": "Adorei",
   "difficulty": "THREE"
 }
 
 ###
 
 ### Update executed exercise (replace with actual UUID)
-PUT {{baseUrl}}/api/v1/executed-exercises/{{executedExerciseId}}
+PUT {{baseUrl}}/api/v1/executed-exercises/4
 Content-Type: application/json
 
 {
-  "customerId": "{{customerId}}",
-  "exerciseId": "{{exerciseId}}",
-  "duration": 45,
-  "rating": 5,
-  "feedback": "Amazing workout session!",
+  "customerId": "2",
+  "exerciseId": "2",
+  "duration": 46,
+  "rating": 1,
+  "feedback": "naO GOSTEI",
   "difficulty": "FOUR"
 }
 
 ###
 
 ### Update feedback only (replace with actual UUID)
-PUT {{baseUrl}}/api/v1/executed-exercises/{{executedExerciseId}}/feedback
+PUT {{baseUrl}}/api/v1/executed-exercises/4/feedback
 Content-Type: application/json
 
 {
-  "feedback": "Updated feedback - excellent form!",
-  "rating": 5
+  "feedback": "Ate q ta doendo",
+  "rating": 2
 }
 
 ###
 
 ### Delete executed exercise (replace with actual UUID)
-DELETE {{baseUrl}}/api/v1/executed-exercises/{{executedExerciseId}}
+DELETE {{baseUrl}}/api/v1/executed-exercises/4
 
 ###
 
